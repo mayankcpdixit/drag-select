@@ -23,6 +23,7 @@
 	line-height: 178px;
 	}
 .drop {
+	cursor: pointer;
 	float: left;
 	border: 1px dashed #888;
 	background: #EEE;

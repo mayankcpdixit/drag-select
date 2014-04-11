@@ -6,17 +6,27 @@
 		16: "SHIFT", 
 		27: "ESCAPE"
 */
-var isNS = (navigator.appName == "Netscape") ? 1 : 0;
 
-if(navigator.appName == "Netscape"){
-	document.captureEvents(Event.MOUSEDOWN||Event.MOUSEUP);
-} 
+/*
+	Variable Declaration and Initialization
+*/
+document.oncontextmenu = mischandler;
+document.onmousedown = mousehandler;
+document.onmouseup = mousehandler;
+var isCtrl = false;
+var isShift = false;
+var lastSelected = undefined;
 
+/*
+	Functions
+*/
+// Right Click Handler function
 function mischandler(){
 	console.log("Right Click happened");
 	return false;
 }
 
+// Mouse eVENT Handler function
 function mousehandler(e){
 	var myevent = (isNS) ? e : event;
 	var eventbutton = (isNS) ? myevent.which : myevent.button;
@@ -24,6 +34,8 @@ function mousehandler(e){
 		return false;
 	}
 }
+
+// Handle SHIFT and CTRL
 function checkSpecialCase(el){
 	if(!isCtrl && !isShift){
 		console.log("no ctrl or shift disselecting all");
@@ -33,19 +45,28 @@ function checkSpecialCase(el){
 		var diffc = eval(lastSelected.dataset.attr) - eval(el.dataset.attr);
 		diffc > 0 ? selectContinuous(el, lastSelected, diffc) : selectContinuous(lastSelected, el, -diffc);
 	}
-	
 }
+
+// DOM MANIPULATION FUCNTION to select all elements.
 function selectAll(){
 	$(".drop").addClass("dropped")
 	$(".dropped").children("input").attr("checked", "checked");
 }
+
+// DOM MANIPULATION FUCNTION to disSelect all elements.
 function disSelectAll(){
 	$(".dropped").children("input").removeAttr("checked");
 	$("*").removeClass("dropped");
 }
+
+/*	
+	DOM MANIPULATION FUCNTION to select ONE element passed.
+	Params: 
+		el: element to be selected
+		noCheck: flag to decide for branching control flow if special case
+*/
 function selectThis(el, noCheck){
 	console.log("selectThis: ", el);
-
 	if(!noCheck){
 		checkSpecialCase(el);
 	}
@@ -54,6 +75,21 @@ function selectThis(el, noCheck){
 	lastSelected = el;
 
 }
+function toggleThis(el){
+	$(el).hasClass("dropped") ? 
+	$(el).children("input").removeAttr("checked") :
+	$(el).children("input").attr("checked", "checked") ;
+	$(el).toggleClass("dropped");
+	lastSelected = el;
+}
+
+/*
+	Working Logic for SHFT and Select
+	Params:
+		fr: From Element
+		to: To Element
+		diffc: Difference of datata-attr
+*/
 function selectContinuous(fr, to, diffc){
 	var thisEl;
 	console.log(diffc," = ",  fr.dataset.attr, to.dataset.attr);
@@ -63,9 +99,15 @@ function selectContinuous(fr, to, diffc){
 		selectThis(thisEl, true);
 	}
 	console.log("lastSelected", lastSelected);
-
 }
 
+/*
+	Actions
+*/
+/*
+	Listeners
+	Might work wrong when both pressed in same time.
+*/
 document.onkeyup=function(e){
 	console.log(e.which)
 	if(e.which == 17){
@@ -100,9 +142,10 @@ document.onkeydown=function(e){
 			return false;
 	}
 }
-document.oncontextmenu = mischandler;
-document.onmousedown = mousehandler;
-document.onmouseup = mousehandler;
-var isCtrl = false;
-var isShift = false;
-var lastSelected = undefined;
+
+// Varifier Module
+var isNS = (navigator.appName == "Netscape") ? 1 : 0;
+
+if(navigator.appName == "Netscape"){
+	document.captureEvents(Event.MOUSEDOWN||Event.MOUSEUP);
+}

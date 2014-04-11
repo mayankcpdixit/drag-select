@@ -43,6 +43,11 @@ jQuery(function($){
 		on clicking each div => Div should be selected
 	*/
 	$(".drop").on('click', function(){
-		selectThis(this);
+		if(isCtrl){
+			toggleThis(this);
+		}else{
+			selectThis(this);
+			
+		}
 	})
 });
