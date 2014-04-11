@@ -1,4 +1,4 @@
-myselection
+phantom-selection
 ===========
 This is a special content selection module. Catching and monitoring keyboard special keys like CTRL & SHIFT I made (tried making) this module that works like selection mechanism of windows or mac.
 Features: 
