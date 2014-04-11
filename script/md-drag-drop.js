@@ -8,8 +8,8 @@ jQuery(function($){
 			On DRAG Start
 		*/
 		.drag("start",function( ev, dd ){
-			if(!isCtrl){
-				console.log("disSelectAll")
+			if(!isCtrl && !isShift){
+				console.log("new drag - disSelectAll")
 				disSelectAll();
 			}
 			return $('<div class="selection" />')
@@ -32,7 +32,7 @@ jQuery(function($){
 			$( this ).addClass("active");
 		})
 		.drop(function( ev, dd ){
-			$( this ).toggleClass("dropped");
+			$( this ).addClass("dropped");
 			$(".dropped").children("input").attr("checked", "checked");
 		})
 		.drop("end",function(){

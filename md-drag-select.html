@@ -11,6 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="./style/md-drag-drop.css">
 </head>
 <body>
+	<span class="flash_msg">notification</span>
 	<h3>Drag and select</h3>
 
 	<ol>
@@ -21,8 +22,8 @@
 </body>
 	<script src="./lib/jquery-1.7.2.js"></script>
 	<script type="text/javascript">
-		for (var i = 35; i >= 0; i--) {
-			$("body").append($("<div class='drop'>Jacob<input type='checkbox'></div>"))
+		for (var i = 0	; i <= 35; i++) {
+			$("body").append($("<div class='drop' data-attr='"+i+"'>Jacob<input type='checkbox'></div>"))
 		}
 	</script>
 	<script src="./lib/jquery.event.drag-2.2.js"></script>
