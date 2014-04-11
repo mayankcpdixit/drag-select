@@ -1,0 +1,31 @@
+.selection {
+	position: absolute;
+	border: 1px solid #89B;
+	background: rgb(0, 145, 238);
+	background-color: rgb(0, 145, 238);
+	border-color: rgb(0, 145, 238);
+	}
+.size2 {
+	height: 118px;
+	line-height: 118px;
+	}
+.size3 {
+	height: 178px;
+	line-height: 178px;
+	}
+.drop {
+	float: left;
+	border: 1px dashed #888;
+	background: #EEE;
+	text-align: center;
+	padding: 20px;
+	margin: 0 10px 10px 0;
+	}
+.dropped {
+	background-color: #808080;
+	border-color: #B89;
+	}	
+.active {  
+	background-color: #A8A8A8;
+	border-color: #9B8;
+	}
